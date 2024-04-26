@@ -1,0 +1,11 @@
+/vendor
+/.idea
+/.vscode
+/.vagrant
+.phpunit.result.cache
+/composer.lock
+.env
+/phpunit.xml
+/build
+/cache
+doctum.php

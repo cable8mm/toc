@@ -1,0 +1,55 @@
+{
+    "name": "cable8mm/toc",
+    "description": "The TOC is an opinionated table of contents generator.",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/cable8mm/toc",
+    "support": {
+        "issues": "https://github.com/cable8mm/toc/issues",
+        "source": "https://github.com/cable8mm/toc"
+    },
+    "authors": [
+        {
+            "name": "Sam Lee",
+            "email": "cable8mm@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "pestphp/pest": "^2.0"
+    },
+    "suggest": {
+        "laravel/pint": "Required to lint.",
+        "pestphp/pest": "Required to test."
+    },
+    "autoload": {
+        "psr-4": {
+            "Cable8mm\\Toc\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "optimize-autoloader": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "scripts": {
+        "test": "./vendor/bin/pest",
+        "lint": "./vendor/bin/pint",
+        "inspect": "./vendor/bin/pint --test",
+        "apidoc": "rm -rf build; rm -rf cache; doctum.phar update doctum.php --output-format=github --no-ansi --no-progress -v;",
+        "opendoc": "open build/index.html"
+    }
+}
