@@ -16,6 +16,11 @@ class Toc implements Stringable
     protected MarkdownString $data;
 
     /**
+     * @var \Cable8mm\Toc\Item[] The item array
+     */
+    protected array $lines = [];
+
+    /**
      * Constructor
      *
      * @param  string  $markdown  The original markdown string
@@ -31,7 +36,7 @@ class Toc implements Stringable
         $this->data = new MarkdownString($markdown);
     }
 
-    public function normalize(): static
+    protected function normalize(): static
     {
         array_map(
             function ($converter) {
@@ -42,6 +47,28 @@ class Toc implements Stringable
         );
 
         return $this;
+    }
+
+    protected function mapping(): static
+    {
+        $this->lines = array_map(
+            function ($line) {
+                return Item::of($line);
+            },
+            explode(PHP_EOL, $this->data)
+        );
+
+        return $this;
+    }
+
+    public function getLines(): array
+    {
+        return $this->lines;
+    }
+
+    public function getLine(int $lineNumber): \Cable8mm\Toc\Item
+    {
+        return $this->lines[$lineNumber] ?? throw new \InvalidArgumentException('No such line number was found for line '.$lineNumber);
     }
 
     /**
@@ -58,11 +85,11 @@ class Toc implements Stringable
 
     public function __toString(): string
     {
-        return $this->data;
+        return (string) $this->data;
     }
 
     public static function of(string $markdown): static
     {
-        return new static($markdown);
+        return (new static($markdown))->normalize()->mapping();
     }
 }

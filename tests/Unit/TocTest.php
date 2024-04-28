@@ -12,16 +12,29 @@ it('should get a file', function () use ($documents) {
     }
 });
 
-it('should clean unused lines', function () {
-    $markdown = file_get_contents(__DIR__.'/../Fixtures/docs/dirty_laravel.md');
-    expect(
-        (string) (new Toc($markdown))->normalize()
-    )->not->toContain('Title');
+describe('normalize', function () {
+    $method = new ReflectionMethod(Toc::class, 'normalize');
+    $method->setAccessible(true);
+
+    test('dirty_laravel', function () use ($method) {
+        $markdown = file_get_contents(__DIR__.'/../Fixtures/docs/dirty_laravel.md');
+
+        expect(
+            (string) $method->invoke(new Toc($markdown))
+        )->not->toContain('Title');
+    });
+
+    test('rhymix', function () use ($method) {
+        $markdown = file_get_contents(__DIR__.'/../Fixtures/docs/rhymix.md');
+        expect(
+            (string) $method->invoke(new Toc($markdown))
+        )->toContain('코어 개발 참여');
+    });
 });
 
-it('should get a title with sharp', function () {
-    $markdown = file_get_contents(__DIR__.'/../Fixtures/docs/rhymix.md');
+test('getLines', function () {
+    $markdown = file_get_contents(__DIR__.'/../Fixtures/docs/laravel.md');
     expect(
-        (string) (new Toc($markdown))->normalize()
-    )->toContain('코어 개발 참여');
+        Toc::of($markdown)->getLines()
+    )->toBeArray();
 });
