@@ -1,9 +1,10 @@
 <?php
 
-namespace Cable8mm\Toc\Types;
+namespace Cable8mm\Toc;
 
 use Cable8mm\Toc\Contracts\ItemInterface;
 use Cable8mm\Toc\Enums\ItemEnum;
+use Cable8mm\Toc\Types\MarkdownString;
 
 /**
  * The TOC Item class represents
@@ -64,7 +65,7 @@ class Item implements ItemInterface
     /**
      * {@inheritDoc}
      */
-    public function getDepth(?string $indent = '  ', ?string $symbol = '-', ?int $depth = 0, ?int $initialHCount = 0, ?int $initialIndentCount = 0): int
+    public function getDepth(?string $indent = '    ', ?string $symbol = '-', ?int $depth = 0, ?int $initialHCount = 0, ?int $initialIndentCount = 0): int
     {
         $hTagCount = strspn(
             $markdown = $this->markdown, '#'
