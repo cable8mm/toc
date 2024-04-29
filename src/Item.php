@@ -11,7 +11,12 @@ use Cable8mm\Toc\Types\MarkdownString;
  */
 class Item implements ItemInterface
 {
-    public function __construct(
+    /**
+     * Constructor
+     *
+     * @param  \Cable8mm\Toc\Types\MarkdownString  $markdown  The Markdown string
+     */
+    protected function __construct(
         protected MarkdownString $markdown
     ) {
 
@@ -105,7 +110,9 @@ class Item implements ItemInterface
     }
 
     /**
-     * {@inheritDoc}
+     * Factory
+     *
+     * @param  string  $markdown  The markdown string
      */
     public static function of(string $markdown): static
     {
