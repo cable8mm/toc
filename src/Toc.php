@@ -9,14 +9,21 @@ use Stringable;
 class Toc implements Stringable
 {
     /**
-     * @var \Cable8mm\Toc\Contracts\ConverterInterface[] The converter array
+     * The converter array
+     *
+     * @var \Cable8mm\Toc\Contracts\ConverterInterface[]
      */
-    private array $converters = [];
+    protected array $converters = [];
 
+    /**
+     * The markdown string for the converter
+     */
     protected MarkdownString $data;
 
     /**
-     * @var \Cable8mm\Toc\Item[] The item array
+     * The item array
+     *
+     * @var \Cable8mm\Toc\Item[]
      */
     protected array $lines = [];
 
@@ -24,7 +31,6 @@ class Toc implements Stringable
      * Constructor
      *
      * @param  string  $markdown  The original markdown string
-     * @param  array  $converters  The parsers array
      */
     public function __construct(
         protected string $markdown)
@@ -36,6 +42,9 @@ class Toc implements Stringable
         $this->data = new MarkdownString($markdown);
     }
 
+    /**
+     * Converts markdown string using the converters provided
+     */
     protected function normalize(): static
     {
         array_map(
@@ -49,6 +58,9 @@ class Toc implements Stringable
         return $this;
     }
 
+    /**
+     * Map lines to Item instance
+     */
     protected function mapping(): static
     {
         $this->lines = array_map(
@@ -61,11 +73,22 @@ class Toc implements Stringable
         return $this;
     }
 
+    /**
+     * Get the toc line array from a markdown string
+     *
+     * @return \Cable8mm\Toc\Item[] The method returns line array from a markdown string
+     */
     public function getLines(): array
     {
         return $this->lines;
     }
 
+    /**
+     * Get the toc nth line from a markdown string
+     *
+     * @param  int  $lineNumber  The line number
+     * @return \Cable8mm\Toc\Item The method returns nth line item from a markdown string
+     */
     public function getLine(int $lineNumber): \Cable8mm\Toc\Item
     {
         return $this->lines[$lineNumber] ?? throw new \InvalidArgumentException('No such line number was found for line '.$lineNumber);
@@ -83,11 +106,21 @@ class Toc implements Stringable
         return $this;
     }
 
+    /**
+     * Implement `Stringable` Interface
+     *
+     * @return string The method returns a string representation
+     */
     public function __toString(): string
     {
         return (string) $this->data;
     }
 
+    /**
+     * Factory
+     *
+     * @param  string  $markdown  The markdown string
+     */
     public static function of(string $markdown): static
     {
         return (new static($markdown))->normalize()->mapping();
