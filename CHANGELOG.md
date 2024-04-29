@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.1.1 - 2024-04-29
+
+### What's Changed
+
+* Revise class comments by [@cable8mm](https://github.com/cable8mm) in https://github.com/cable8mm/toc/pull/3
+
+**Full Changelog**: https://github.com/cable8mm/toc/compare/v1.1.0...v1.1.1
+
 ## v1.1.0 - 2024-04-28
 
 ### What's Changed
