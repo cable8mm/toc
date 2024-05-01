@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.2.0 - 2024-05-01
+
+### What's Changed
+
+* Add a group functionality into TOC by [@cable8mm](https://github.com/cable8mm) in https://github.com/cable8mm/toc/pull/4
+
+**Full Changelog**: https://github.com/cable8mm/toc/compare/v1.1.1...v1.2.0
+
 ## v1.1.1 - 2024-04-29
 
 ### What's Changed
