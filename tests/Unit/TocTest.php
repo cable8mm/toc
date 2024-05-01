@@ -38,3 +38,27 @@ test('getLines', function () {
         Toc::of($markdown)->getLines()
     )->toBeArray();
 });
+
+test('toArray', function () {
+    $markdown = '
+    - ## Prologue
+        - [Release Notes](/docs/{{version}}/releases)
+        - [Upgrade Guide](/docs/{{version}}/upgrade)
+        - [Contribution Guide](/docs/{{version}}/contributions)
+    - ## Getting Started
+        - [Installation](/docs/{{version}}/installation)
+        - [Configuration](/docs/{{version}}/configuration)
+    ';
+
+    $sections = Toc::of($markdown)->toArray();
+
+    expect(count($sections))->toBe(2);
+
+    expect(count($sections[0]['pages']))->toBe(3);
+
+    expect(count($sections[1]['pages']))->toBe(2);
+
+    expect($sections[0]['section']->getTitle())->toBe('Prologue');
+
+    expect($sections[1]['section']->getTitle())->toBe('Getting Started');
+});
