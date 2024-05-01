@@ -3,6 +3,7 @@
 namespace Cable8mm\Toc;
 
 use Cable8mm\Toc\Converters\CleanConverter;
+use Cable8mm\Toc\Enums\ItemEnum;
 use Cable8mm\Toc\Types\MarkdownString;
 use Stringable;
 
@@ -26,6 +27,11 @@ class Toc implements Stringable
      * @var \Cable8mm\Toc\Item[]
      */
     protected array $lines = [];
+
+    /**
+     * @var <int, \Cable8mm\Types\Item[]> The navigation items
+     */
+    protected array $sections = [];
 
     /**
      * Constructor
@@ -73,6 +79,43 @@ class Toc implements Stringable
         return $this;
     }
 
+    protected function grouping(): static
+    {
+        $sectionKey = -1;
+
+        foreach ($this->lines as $key => $line) {
+            if ($line->getType() === ItemEnum::section) {
+                $sectionKey++;
+                $this->sections[$sectionKey]['section'] = $line;
+            }
+
+            if ($line->getType() === ItemEnum::page) {
+                $this->sections[$sectionKey]['pages'][] = $line;
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get the section title
+     *
+     * @param  string  $title  The title
+     * @return string|null The method returns the section title if found, null otherwise
+     */
+    public function getSectionTitle(string $title): ?string
+    {
+        foreach ($this->sections as $section) {
+            foreach ($section['pages'] as $page) {
+                if ($title === $page->title) {
+                    return $section['section'];
+                }
+            }
+        }
+
+        return null;
+    }
+
     /**
      * Get the toc line array from a markdown string
      *
@@ -117,12 +160,22 @@ class Toc implements Stringable
     }
 
     /**
+     * Output the navigation data
+     *
+     * @return array The method returns the navigation data
+     */
+    public function toArray(): array
+    {
+        return $this->sections;
+    }
+
+    /**
      * Factory
      *
      * @param  string  $markdown  The markdown string
      */
     public static function of(string $markdown): static
     {
-        return (new static($markdown))->normalize()->mapping();
+        return (new static($markdown))->normalize()->mapping()->grouping();
     }
 }

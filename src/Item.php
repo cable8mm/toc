@@ -5,11 +5,12 @@ namespace Cable8mm\Toc;
 use Cable8mm\Toc\Contracts\ItemInterface;
 use Cable8mm\Toc\Enums\ItemEnum;
 use Cable8mm\Toc\Types\MarkdownString;
+use Stringable;
 
 /**
  * The TOC Item class represents
  */
-class Item implements ItemInterface
+class Item implements ItemInterface, Stringable
 {
     /**
      * Constructor
@@ -107,6 +108,44 @@ class Item implements ItemInterface
         }
 
         throw new \InvalidArgumentException(sprintf('The depth cannot resolved from `%s`', $markdown));
+    }
+
+    /**
+     * Get the HTML of the given markdown string
+     *
+     * @return string The method returns the HTML of the given markdown string
+     */
+    public function toHtml(): string
+    {
+        $output = '<li>';
+
+        if ($this->getLink() !== null) {
+            $output .= '<a href="'.$this->getLink().'">';
+        }
+
+        if ($this->getType() === ItemEnum::section) {
+            $output .= '<h2>'.$this->getTitle().'</h2>';
+        }
+
+        if ($this->getType() === ItemEnum::page) {
+            $output .= $this->getTitle();
+        }
+
+        if ($this->getLink()) {
+            $output .= '</a>';
+        }
+
+        $output .= '</li>';
+
+        return $output;
+    }
+
+    /**
+     * Implement Stringable
+     */
+    public function __toString(): string
+    {
+        return $this->toHtml();
     }
 
     /**
