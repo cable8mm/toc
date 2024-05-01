@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.2.1 - 2024-05-01
+
+### What's Changed
+
+* Fix a comment error by [@cable8mm](https://github.com/cable8mm) in https://github.com/cable8mm/toc/pull/5
+
+**Full Changelog**: https://github.com/cable8mm/toc/compare/v1.2.0...v1.2.1
+
 ## v1.2.0 - 2024-05-01
 
 ### What's Changed
