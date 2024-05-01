@@ -86,7 +86,7 @@
 
     
     <p>        class
-    <strong>Item</strong>        implements        <a href="../../Cable8mm/Toc/Contracts/ItemInterface.html"><abbr title="Cable8mm\Toc\Contracts\ItemInterface">ItemInterface</abbr></a>
+    <strong>Item</strong>        implements        <a href="../../Cable8mm/Toc/Contracts/ItemInterface.html"><abbr title="Cable8mm\Toc\Contracts\ItemInterface">ItemInterface</abbr></a>, <a target="_blank" rel="noopener" href="https://www.php.net/Stringable">Stringable</a>
 </p>
 
         
@@ -154,6 +154,26 @@
             </div>
                     <div class="row">
                 <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method_toHtml">toHtml</a>()
+        
+                                            <p><p>Get the HTML of the given markdown string</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
+                    string
+                </div>
+                <div class="col-md-8">
+                    <a href="#method___toString">__toString</a>()
+        
+                                            <p><p>Implement Stringable</p></p>                </div>
+                <div class="col-md-2"></div>
+            </div>
+                    <div class="row">
+                <div class="col-md-2 type">
                     static&nbsp;<a href="../../Cable8mm/Toc/Item.html"><abbr title="Cable8mm\Toc\Item">Item</abbr></a>
                 </div>
                 <div class="col-md-8">
@@ -170,7 +190,7 @@
             <div id="method-details">
                     <div class="method-item">
                     <h3 id="method___construct">
-        <div class="location">at line 19</div>
+        <div class="location">at line 20</div>
         <code>            protected        
     <strong>__construct</strong>(<a href="../../Cable8mm/Toc/Types/MarkdownString.html"><abbr title="Cable8mm\Toc\Types\MarkdownString">MarkdownString</abbr></a> $markdown)
         </code>
@@ -203,7 +223,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getTitle">
-        <div class="location">at line 28</div>
+        <div class="location">at line 29</div>
         <code>                    string
     <strong>getTitle</strong>()
         </code>
@@ -235,7 +255,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getLink">
-        <div class="location">at line 50</div>
+        <div class="location">at line 51</div>
         <code>                    string|null
     <strong>getLink</strong>()
         </code>
@@ -267,7 +287,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getType">
-        <div class="location">at line 63</div>
+        <div class="location">at line 64</div>
         <code>                    <abbr title="Cable8mm\Toc\Enums\ItemEnum">ItemEnum</abbr>
     <strong>getType</strong>()
         </code>
@@ -299,7 +319,7 @@
             </div>
                     <div class="method-item">
                     <h3 id="method_getDepth">
-        <div class="location">at line 73</div>
+        <div class="location">at line 74</div>
         <code>                    int
     <strong>getDepth</strong>(string|null $indent = &#039;    &#039;, string|null $symbol = &#039;-&#039;, int|null $depth = 0, int|null $initialHCount = 0, int|null $initialIndentCount = 0)
         </code>
@@ -369,8 +389,72 @@
 
             </div>
                     <div class="method-item">
+                    <h3 id="method_toHtml">
+        <div class="location">at line 118</div>
+        <code>                    string
+    <strong>toHtml</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Get the HTML of the given markdown string</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td><p>The method returns the HTML of the given markdown string</p></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
+                    <h3 id="method___toString">
+        <div class="location">at line 146</div>
+        <code>                    string
+    <strong>__toString</strong>()
+        </code>
+    </h3>
+    <div class="details">    
+    
+            
+
+        <div class="method-description">
+                            <p><p>Implement Stringable</p></p>                        
+        </div>
+        <div class="tags">
+            
+                            <h4>Return Value</h4>
+
+                    <table class="table table-condensed">
+        <tr>
+            <td>string</td>
+            <td></td>
+        </tr>
+    </table>
+
+            
+            
+            
+                    </div>
+    </div>
+
+            </div>
+                    <div class="method-item">
                     <h3 id="method_of">
-        <div class="location">at line 117</div>
+        <div class="location">at line 156</div>
         <code>        static            <a href="../../Cable8mm/Toc/Item.html"><abbr title="Cable8mm\Toc\Item">Item</abbr></a>
     <strong>of</strong>(string $markdown)
         </code>
