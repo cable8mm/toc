@@ -22,14 +22,17 @@ class Toc implements Stringable
     protected MarkdownString $data;
 
     /**
-     * The item array
+     * The line array
      *
      * @var \Cable8mm\Toc\Item[]
      */
     protected array $lines = [];
 
     /**
-     * @var <int, \Cable8mm\Types\Item[]> The navigation items
+     * The section array
+     *
+     * @example $sections[0]['section']->getTitle()
+     * @example $sections[0]['pages'][0]->getTitle()
      */
     protected array $sections = [];
 
