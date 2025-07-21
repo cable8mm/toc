@@ -15,10 +15,7 @@ class MarkdownString implements Stringable
      * @example new MarkdownString('# foo')
      */
     public function __construct(
-        protected string $markdown = '')
-    {
-
-    }
+        protected string $markdown = '') {}
 
     /**
      * Get the link from the Markdown string

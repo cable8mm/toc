@@ -14,7 +14,7 @@ test('remove unused section title', function () {
     - [Configuration](/docs/{{version}}/configuration)';
 
     expect(
-        (new CleanJustTopHConverter())->do(new MarkdownString($markdown))
+        (new CleanJustTopHConverter)->do(new MarkdownString($markdown))
     )->not->toBe('Unused Section title');
 });
 

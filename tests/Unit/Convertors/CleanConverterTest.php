@@ -16,7 +16,7 @@ describe('do', function () {
             - [Configuration](/docs/{{version}}/configuration)
         ';
 
-        $lines = (new CleanConverter())->do(new MarkdownString($markdown));
+        $lines = (new CleanConverter)->do(new MarkdownString($markdown));
 
         expect(
             preg_match_all('/^([^\r\n\w]+|)$/m', $lines)
@@ -31,7 +31,7 @@ describe('do', function () {
             - [Configuration](/docs/{{version}}/configuration)
         ';
 
-        $lines = (new CleanConverter())->do(new MarkdownString($markdown));
+        $lines = (new CleanConverter)->do(new MarkdownString($markdown));
 
         expect(
             preg_match_all('/^([^\r\n\w]+|)$/m', $lines)
