@@ -19,9 +19,7 @@ class Item implements ItemInterface, Stringable
      */
     protected function __construct(
         protected MarkdownString $markdown
-    ) {
-
-    }
+    ) {}
 
     /**
      * {@inheritDoc}
