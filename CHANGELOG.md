@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.3.0 - 2025-07-21
+
+### What's Changed
+
+* Create `CleanJustTopHConverter` for removing unused titles by [@cable8mm](https://github.com/cable8mm) in https://github.com/cable8mm/toc/pull/6
+
+**Full Changelog**: https://github.com/cable8mm/toc/compare/v1.2.1...v1.3.0
+
 ## v1.2.1 - 2024-05-01
 
 ### What's Changed
