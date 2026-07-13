@@ -1,5 +1,13 @@
 # Release Notes
 
+## v1.3.1 - 2026-07-13
+
+### What's Changed
+
+* feat: improvements by [@cable8mm](https://github.com/cable8mm) in https://github.com/cable8mm/toc/pull/7
+
+**Full Changelog**: https://github.com/cable8mm/toc/compare/v1.3.0...v1.3.1
+
 ## v1.3.0 - 2025-07-21
 
 ### What's Changed
