@@ -27,6 +27,21 @@ describe('Laravel Style', function () {
         expect(Item::of('    - [Release Notes](/docs/{{version}}/releases)')->getDepth())->toBe(2);
         expect(Item::of('- [API Documentation](/api/11.x)')->getDepth())->toBe(1);
     });
+
+    test('toHtml returns correct HTML for section', function () {
+        $html = Item::of('- ## Prologue')->toHtml();
+        expect($html)->toBe('<li><h2>Prologue</h2></li>');
+    });
+
+    test('toHtml returns correct HTML for page with link', function () {
+        $html = Item::of('    - [Release Notes](/docs/{{version}}/releases)')->toHtml();
+        expect($html)->toBe('<li><a href="/docs/{{version}}/releases">Release Notes</a></li>');
+    });
+
+    test('__toString returns HTML', function () {
+        expect((string) Item::of('- ## Prologue'))->toBe('<li><h2>Prologue</h2></li>');
+        expect((string) Item::of('    - [Release Notes](/docs/{{version}}/releases)'))->toBe('<li><a href="/docs/{{version}}/releases">Release Notes</a></li>');
+    });
 });
 
 describe('Tizen Style', function () {
@@ -56,6 +71,16 @@ describe('Tizen Style', function () {
         expect(Item::of('## Versions')->getDepth(indent: '#', symbol: '#', initialHCount: 1, depth: 1))->toBe(2);
         expect(Item::of('## [Overview](/platform/what-is-tizen/overview.md)')->getDepth(indent: '#', symbol: '#', initialHCount: 1, depth: 2))->toBe(2);
         expect(Item::of('### [TV](/platform/what-is-tizen/profiles/tv.md)')->getDepth(indent: '#', symbol: '#', initialHCount: 1, depth: 2))->toBe(3);
+    });
+
+    test('toHtml for Tizen section without link', function () {
+        $html = Item::of('# What is Tizen?')->toHtml();
+        expect($html)->toBe('<li><h2>What is Tizen?</h2></li>');
+    });
+
+    test('toHtml for Tizen page with link', function () {
+        $html = Item::of('### [TV](/platform/what-is-tizen/profiles/tv.md)')->toHtml();
+        expect($html)->toBe('<li><a href="/platform/what-is-tizen/profiles/tv.md">TV</a></li>');
     });
 });
 
@@ -89,7 +114,7 @@ describe('Naver Clova Style', function () {
     });
 });
 
-describe('Rhymix Clova Style', function () {
+describe('Rhymix Style', function () {
     test('getTitle', function () {
         expect(Item::of('### 개요')->getTitle())->toBe('개요');
         expect(Item::of('- [설치 환경](./ko/introduction/requirements.md)')->getTitle())->toBe('설치 환경');
