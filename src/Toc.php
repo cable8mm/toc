@@ -2,6 +2,7 @@
 
 namespace Cable8mm\Toc;
 
+use Cable8mm\Toc\Contracts\ConverterInterface;
 use Cable8mm\Toc\Converters\CleanConverter;
 use Cable8mm\Toc\Enums\ItemEnum;
 use Cable8mm\Toc\Types\MarkdownString;
@@ -12,7 +13,7 @@ class Toc implements Stringable
     /**
      * The converter array
      *
-     * @var \Cable8mm\Toc\Contracts\ConverterInterface[]
+     * @var ConverterInterface[]
      */
     protected array $converters = [];
 
@@ -24,7 +25,7 @@ class Toc implements Stringable
     /**
      * The line array
      *
-     * @var \Cable8mm\Toc\Item[]
+     * @var Item[]
      */
     protected array $lines = [];
 
@@ -56,13 +57,10 @@ class Toc implements Stringable
      */
     protected function normalize(): static
     {
-        array_map(
-            function ($converter) {
-                /** @var \Cable8mm\Toc\Contracts\ConverterInterface $converter */
-                $this->data = $converter->do($this->data);
-            },
-            $this->converters
-        );
+        foreach ($this->converters as $converter) {
+            /** @var ConverterInterface $converter */
+            $this->data = $converter->do($this->data);
+        }
 
         return $this;
     }
@@ -110,8 +108,8 @@ class Toc implements Stringable
     {
         foreach ($this->sections as $section) {
             foreach ($section['pages'] as $page) {
-                if ($title === $page->title) {
-                    return $section['section'];
+                if ($title === $page->getTitle()) {
+                    return $section['section']->getTitle();
                 }
             }
         }
@@ -122,7 +120,7 @@ class Toc implements Stringable
     /**
      * Get the toc line array from a markdown string
      *
-     * @return \Cable8mm\Toc\Item[] The method returns line array from a markdown string
+     * @return Item[] The method returns line array from a markdown string
      */
     public function getLines(): array
     {
@@ -133,9 +131,9 @@ class Toc implements Stringable
      * Get the toc nth line from a markdown string
      *
      * @param  int  $lineNumber  The line number
-     * @return \Cable8mm\Toc\Item The method returns nth line item from a markdown string
+     * @return Item The method returns nth line item from a markdown string
      */
-    public function getLine(int $lineNumber): \Cable8mm\Toc\Item
+    public function getLine(int $lineNumber): Item
     {
         return $this->lines[$lineNumber] ?? throw new \InvalidArgumentException('No such line number was found for line '.$lineNumber);
     }
@@ -143,7 +141,7 @@ class Toc implements Stringable
     /**
      * Add converters to the converter array
      *
-     * @param  \Cable8mm\Toc\Contracts\ConverterInterface[]  $converters  The converter array
+     * @param  ConverterInterface[]  $converters  The converter array
      */
     public function addConverters(array $converters): static
     {

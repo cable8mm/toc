@@ -23,7 +23,7 @@ interface ItemInterface
     /**
      * Get the type of the navigation item
      *
-     * @return \Cable8mm\Toc\Enums\ItemEnum The method returns the type of the navigation item
+     * @return ItemEnum The method returns the type of the navigation item
      */
     public function getType(): ItemEnum;
 

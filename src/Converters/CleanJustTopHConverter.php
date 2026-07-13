@@ -7,6 +7,10 @@ use Cable8mm\Toc\Types\MarkdownString;
 
 /**
  * Clean top H tags if it has been alone
+ *
+ * Removes a top-level heading (with the fewest # characters)
+ * if it appears alone and no other line uses the same heading level.
+ * This handles cases like a document title that doesn't belong in the TOC.
  */
 class CleanJustTopHConverter implements ConverterInterface
 {
@@ -24,25 +28,24 @@ class CleanJustTopHConverter implements ConverterInterface
         $topHCount = 6;
         $topHRowCount = 0;
 
-        $output = '';
-
         foreach ($lines as $line) {
             $hCount = strspn($line, '#');
 
-            if ($hCount < $topHCount) {
-                $topHRowCount++;
+            if ($hCount > 0 && $hCount < $topHCount) {
+                $topHRowCount = 1;
                 $topHCount = $hCount;
-            }
-
-            if ($hCount === $topHCount) {
+            } elseif ($hCount === $topHCount) {
                 $topHRowCount++;
             }
         }
 
+        // If there's a heading level used exactly once and it's the topmost level, remove that line
         if ($topHCount !== 6 && $topHRowCount === 1) {
-
+            $lines = array_filter($lines, function ($line) use ($topHCount) {
+                return strspn($line, '#') !== $topHCount;
+            });
         }
 
-        return new MarkdownString($output);
+        return new MarkdownString(implode(PHP_EOL, array_values($lines)));
     }
 }

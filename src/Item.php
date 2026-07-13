@@ -15,7 +15,7 @@ class Item implements ItemInterface, Stringable
     /**
      * Constructor
      *
-     * @param  \Cable8mm\Toc\Types\MarkdownString  $markdown  The Markdown string
+     * @param  MarkdownString  $markdown  The Markdown string
      */
     protected function __construct(
         protected MarkdownString $markdown
